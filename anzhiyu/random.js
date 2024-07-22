@@ -1,3 +1,3 @@
-var posts=["2024/07/17/hello-world/","2024/07/17/my-paly/","2024/07/22/hello-world - 副本/"];function toRandomPost(){
+var posts=["2024/07/17/hello-world/"];function toRandomPost(){
     pjax.loadUrl('/'+posts[Math.floor(Math.random() * posts.length)]);
   };
