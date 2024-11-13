@@ -1,0 +1,242 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>利用itext生成pdf | 小恨难南Blog</title><meta name="author" content="XHNN"><meta name="copyright" content="XHNN"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="利用itext5生成pdf文件1. 导入pom依赖123456&lt;!--itext处理 PDF 文档--&gt;&lt;dependency&gt;    &lt;groupId&gt;com.itextpdf&lt;&#x2F;groupId&gt;    &lt;artifactId&gt;itextpdf&lt;&#x2F;artifactId&gt;    &lt;version&gt;5.5.13.4&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="利用itext生成pdf">
+<meta property="og:url" content="https://hnnnnnanq7.github.io/2024/11/13/itext%E7%94%9F%E6%88%90pdf/index.html">
+<meta property="og:site_name" content="小恨难南Blog">
+<meta property="og:description" content="利用itext5生成pdf文件1. 导入pom依赖123456&lt;!--itext处理 PDF 文档--&gt;&lt;dependency&gt;    &lt;groupId&gt;com.itextpdf&lt;&#x2F;groupId&gt;    &lt;artifactId&gt;itextpdf&lt;&#x2F;artifactId&gt;    &lt;version&gt;5.5.13.4&amp;">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic.imgdb.cn/item/66aa6670d9c307b7e97ada81.png">
+<meta property="article:published_time" content="2024-11-12T16:14:58.494Z">
+<meta property="article:modified_time" content="2024-11-12T17:26:54.889Z">
+<meta property="article:author" content="XHNN">
+<meta property="article:tag" content="itext">
+<meta property="article:tag" content="pdf">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic.imgdb.cn/item/66aa6670d9c307b7e97ada81.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://hnnnnnanq7.github.io/2024/11/13/itext%E7%94%9F%E6%88%90pdf/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: XHNN","link":"链接: ","source":"来源: 小恨难南Blog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '利用itext生成pdf',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-11-13 01:26:54'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'"><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://pic.imgdb.cn/item/66aa6670d9c307b7e97ada81.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">3</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/live/"><i class="fa-fw fas fa-video"></i><span> 生活</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 个人</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></li><li><a class="site-page child" href="/artitalk/"><i class="fa-fw fas fa-images"></i><span> 闲言碎语</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="小恨难南Blog"><span class="site-name">小恨难南Blog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/live/"><i class="fa-fw fas fa-video"></i><span> 生活</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 个人</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></li><li><a class="site-page child" href="/artitalk/"><i class="fa-fw fas fa-images"></i><span> 闲言碎语</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">利用itext生成pdf</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-11-12T16:14:58.494Z" title="发表于 2024-11-13 00:14:58">2024-11-13</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-11-12T17:26:54.889Z" title="更新于 2024-11-13 01:26:54">2024-11-13</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/pdf/">pdf</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>4分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="利用itext生成pdf"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="利用itext5生成pdf文件"><a href="#利用itext5生成pdf文件" class="headerlink" title="利用itext5生成pdf文件"></a>利用itext5生成pdf文件</h1><h2 id="1-导入pom依赖"><a href="#1-导入pom依赖" class="headerlink" title="1. 导入pom依赖"></a>1. 导入pom依赖</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--itext处理 PDF 文档--&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.itextpdf&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;itextpdf&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;5.5.13.4&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p>本文依靠itext生成pdf，原本pdf包不包含中文，只是使用这个依赖的话在pdf中添加中文的话会不显示，原因为依赖中不包含中文字体。</p>
+<p>让itextpdf正常输出中文内容，需要导入jar包，亲测最实用的最简单的方法就是去maven库下载。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--itext处理中文文档--&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.itextpdf&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;itext-asian&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;5.2.0&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p>加入亚洲语言包，即可显示中文。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Font</span> <span class="variable">font</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Font</span>(BaseFont.createFont(<span class="string">&quot;STSong-Light&quot;</span>, <span class="string">&quot;UniGB-UCS2-H&quot;</span>, BaseFont.NOT_EMBEDDED));</span><br><span class="line">document.add(<span class="keyword">new</span> <span class="title class_">Paragraph</span>(<span class="string">&quot;测试数据&quot;</span>, font));</span><br></pre></td></tr></table></figure>
+
+<h4 id="参数详解："><a href="#参数详解：" class="headerlink" title="参数详解："></a>参数详解：</h4><ol>
+<li><strong>“STSong-Light”</strong> - 这是指定字体文件的名称或路径。在这个例子中，<code>STSong-Light</code> 是一种中文字体（宋体），通常用于显示中文字符。</li>
+<li><strong>“UniGB-UCS2-H”</strong> - 这是指定字体的编码方式。<code>UniGB-UCS2-H</code> 表示使用GB编码集（适用于简体中文）的UCS-2编码格式，其中“H”表示水平书写。</li>
+<li><strong>BaseFont.NOT_EMBEDDED</strong> - 这个参数指定了是否将字体嵌入到PDF文档中。<code>BaseFont.NOT_EMBEDDED</code> 意味着字体不会被嵌入到PDF中，而是依赖于读者的系统中是否有相同的字体。如果选择 <code>BaseFont.EMBEDDED</code>，则会将字体文件的一部分或全部嵌入到PDF文档中，确保在任何设备上都能正确显示字体。</li>
+</ol>
+<h2 id="2-编写后端代码"><a href="#2-编写后端代码" class="headerlink" title="2.编写后端代码"></a>2.编写后端代码</h2><h3 id="1-service"><a href="#1-service" class="headerlink" title="1.service"></a>1.service</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> ResponseEntity&lt;<span class="type">byte</span>[]&gt; getPDF() <span class="keyword">throws</span> DocumentException, IOException &#123;</span><br><span class="line">        <span class="type">Document</span> <span class="variable">document</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Document</span>(); <span class="comment">//新建文档对象</span></span><br><span class="line">        <span class="type">ByteArrayOutputStream</span> <span class="variable">baos</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ByteArrayOutputStream</span>();    <span class="comment">//新建字节输出流对象</span></span><br><span class="line">        <span class="type">PdfWriter</span> <span class="variable">writer</span> <span class="operator">=</span> PdfWriter.getInstance(document,baos);      <span class="comment">//对文档进行写入输出流 ，指定输出流</span></span><br><span class="line">        document.open();        <span class="comment">//开启文档</span></span><br><span class="line">        System.out.println(document.getPageSize().getHeight());         <span class="comment">//文档每页高度</span></span><br><span class="line">        System.out.println(document.getPageSize().getWidth());         <span class="comment">//文档每页宽度</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 添加内容</span></span><br><span class="line">        <span class="comment">// 文档添加文本段落</span></span><br><span class="line">        <span class="comment">// 加入动态文字  产品名</span></span><br><span class="line">        <span class="type">BaseFont</span> <span class="variable">bfChinese</span> <span class="operator">=</span> BaseFont.createFont(<span class="string">&quot;STSong-Light&quot;</span>, <span class="string">&quot;UniGB-UCS2-H&quot;</span>, BaseFont.NOT_EMBEDDED);    <span class="comment">//设置中文字体, 这里用宋体</span></span><br><span class="line">        <span class="type">Font</span> <span class="variable">font</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Font</span>(bfChinese, <span class="number">12</span>, Font.NORMAL, BaseColor.RED);<span class="comment">//设置行间距，字体样式，字体颜色</span></span><br><span class="line">        document.add(<span class="keyword">new</span> <span class="title class_">Paragraph</span>(<span class="string">&quot;段落内容&quot;</span>, font));<span class="comment">//设置段落内容</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 使用ColumnText将段落放置在绝对位置</span></span><br><span class="line">        <span class="type">Paragraph</span> <span class="variable">paragraph</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Paragraph</span>(<span class="string">&quot;段落内容&quot;</span>, font);<span class="comment">//设置段落内容</span></span><br><span class="line">        <span class="type">ColumnText</span> <span class="variable">columnText</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ColumnText</span>(writer.getDirectContent());</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> <span class="variable">absX</span> <span class="operator">=</span> <span class="number">50</span>;          <span class="comment">//绝对位置左下角x点</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">absY</span> <span class="operator">=</span> <span class="number">800</span>;         <span class="comment">//绝对位置左下角y点         文档中的坐标轴是反的，所以y点是反过来的  （0,0）是左下角，（1000,1000）是右上角</span></span><br><span class="line">                                <span class="comment">// 设置绝对位置</span></span><br><span class="line">        columnText.setSimpleColumn(paragraph, absX, absY, absX+ <span class="number">50</span> , absY+ <span class="number">50</span>, <span class="number">16</span>, Element.ALIGN_CENTER);<span class="comment">//设置段落内容，绝对位置，宽度，高度，行间距，对齐方式</span></span><br><span class="line">        columnText.go();        <span class="comment">//开始输出</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 加载图像</span></span><br><span class="line">        <span class="type">Image</span> <span class="variable">image</span> <span class="operator">=</span> Image.getInstance(<span class="keyword">new</span> <span class="title class_">URL</span>(<span class="string">&quot;your_image_url&quot;</span>));</span><br><span class="line">        <span class="comment">// 设置图像大小和位置</span></span><br><span class="line">        image.scaleToFit(<span class="number">150</span>, <span class="number">192</span>); <span class="comment">// 按照宽度和高度缩放图像</span></span><br><span class="line">        image.setAbsolutePosition(absX, absY - image.getScaledHeight()); <span class="comment">// 设置图像在页面上的绝对位置</span></span><br><span class="line">        <span class="comment">// 将图像添加到文档中</span></span><br><span class="line">        document.add(image);</span><br><span class="line"></span><br><span class="line">        document.close();       <span class="comment">//关闭文档</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 设置响应头</span></span><br><span class="line">        <span class="type">HttpHeaders</span> <span class="variable">headers</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">HttpHeaders</span>();</span><br><span class="line">        headers.add(<span class="string">&quot;Content-Type&quot;</span>, <span class="string">&quot;application/pdf&quot;</span>);</span><br><span class="line">        headers.add(HttpHeaders.CONTENT_DISPOSITION, <span class="string">&quot;attachment; filename=generated.pdf&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 返回PDF数据</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ResponseEntity</span>&lt;<span class="type">byte</span>[]&gt;(baos.toByteArray(), headers, HttpStatus.OK);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-编写controller"><a href="#2-编写controller" class="headerlink" title="2.编写controller"></a>2.编写controller</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> PDFService pdfService;</span><br><span class="line"></span><br><span class="line"><span class="meta">@GetMapping(&quot;/download&quot;)</span></span><br><span class="line"><span class="keyword">public</span> ResponseEntity <span class="title function_">download</span><span class="params">()</span> <span class="keyword">throws</span> DocumentException, IOException &#123;</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        ResponseEntity&lt;<span class="type">byte</span>[]&gt; responseEntity = pdfService.getPDF();</span><br><span class="line">        <span class="keyword">return</span> responseEntity;</span><br><span class="line">    &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-前端代码"><a href="#3-前端代码" class="headerlink" title="3. 前端代码"></a>3. 前端代码</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="title function_">printPDT4AllProduct</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> response = <span class="keyword">await</span> <span class="title function_">axios</span>(&#123;</span><br><span class="line">            <span class="attr">url</span>: <span class="string">&#x27;/product/printPDT4AllProduct&#x27;</span>,</span><br><span class="line">            <span class="attr">method</span>: <span class="string">&#x27;GET&#x27;</span>,</span><br><span class="line">            <span class="attr">responseType</span>: <span class="string">&#x27;blob&#x27;</span>, <span class="comment">// 重要：设置响应类型为blob</span></span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 创建一个临时的URL对象</span></span><br><span class="line">        <span class="keyword">const</span> url = <span class="variable language_">window</span>.<span class="property">URL</span>.<span class="title function_">createObjectURL</span>(<span class="keyword">new</span> <span class="title class_">Blob</span>([response.<span class="property">data</span>]));</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 创建一个隐藏的&lt;a&gt;元素来触发下载</span></span><br><span class="line">        <span class="keyword">const</span> link = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;a&#x27;</span>);</span><br><span class="line">        link.<span class="property">href</span> = url;</span><br><span class="line">        link.<span class="title function_">setAttribute</span>(<span class="string">&#x27;download&#x27;</span>, <span class="string">&#x27;generated.pdf&#x27;</span>); <span class="comment">// 设置下载文件名</span></span><br><span class="line">        <span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">appendChild</span>(link);</span><br><span class="line">        link.<span class="title function_">click</span>();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 清理</span></span><br><span class="line">        <span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">removeChild</span>(link);</span><br><span class="line">        <span class="variable language_">window</span>.<span class="property">URL</span>.<span class="title function_">revokeObjectURL</span>(url);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&#x27;There has been a problem with your fetch operation:&#x27;</span>, error);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://hnnnnnanq7.github.io">XHNN</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://hnnnnnanq7.github.io/2024/11/13/itext%E7%94%9F%E6%88%90pdf/">https://hnnnnnanq7.github.io/2024/11/13/itext生成pdf/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://hnnnnnanq7.github.io" target="_blank">小恨难南Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/itext/">itext</a><a class="post-meta__tags" href="/tags/pdf/">pdf</a></div><div class="post_share"><div class="social-share" data-image="https://pic.imgdb.cn/item/66aa6670d9c307b7e97ada81.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2024/08/16/%E5%9C%A8hexo%E4%B8%AD%E6%96%B0%E5%A2%9EArtitalk%E8%AF%B4%E8%AF%B4%E5%8A%9F%E8%83%BD/" title="在hexo中添加Artitalk说说功能"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">在hexo中添加Artitalk说说功能</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://pic.imgdb.cn/item/66aa6670d9c307b7e97ada81.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">XHNN</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">3</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/HnnnnnAnq7"><i class="fab fa-github"></i><span>🛴前往小家...</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/HnnnnnAnq7" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:HnnnnnAnq7@163.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%A9%E7%94%A8itext5%E7%94%9F%E6%88%90pdf%E6%96%87%E4%BB%B6"><span class="toc-number">1.</span> <span class="toc-text">利用itext5生成pdf文件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%AF%BC%E5%85%A5pom%E4%BE%9D%E8%B5%96"><span class="toc-number">1.1.</span> <span class="toc-text">1. 导入pom依赖</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E8%AF%A6%E8%A7%A3%EF%BC%9A"><span class="toc-number">1.1.0.1.</span> <span class="toc-text">参数详解：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E7%BC%96%E5%86%99%E5%90%8E%E7%AB%AF%E4%BB%A3%E7%A0%81"><span class="toc-number">1.2.</span> <span class="toc-text">2.编写后端代码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-service"><span class="toc-number">1.2.1.</span> <span class="toc-text">1.service</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E7%BC%96%E5%86%99controller"><span class="toc-number">1.2.2.</span> <span class="toc-text">2.编写controller</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%89%8D%E7%AB%AF%E4%BB%A3%E7%A0%81"><span class="toc-number">1.2.3.</span> <span class="toc-text">3. 前端代码</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/11/13/itext%E7%94%9F%E6%88%90pdf/" title="利用itext生成pdf">利用itext生成pdf</a><time datetime="2024-11-12T16:14:58.494Z" title="发表于 2024-11-13 00:14:58">2024-11-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/16/%E5%9C%A8hexo%E4%B8%AD%E6%96%B0%E5%A2%9EArtitalk%E8%AF%B4%E8%AF%B4%E5%8A%9F%E8%83%BD/" title="在hexo中添加Artitalk说说功能">在hexo中添加Artitalk说说功能</a><time datetime="2024-08-16T12:29:59.453Z" title="发表于 2024-08-16 20:29:59">2024-08-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/05/05/Java%E9%9D%A2%E8%AF%95%E9%A2%98%E4%B8%80/" title="Java面试题（一）">Java面试题（一）</a><time datetime="2023-05-04T16:00:00.000Z" title="发表于 2023-05-05 00:00:00">2023-05-05</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2024 By XHNN</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">I wish you to become your own sun, no need to rely on who's light.<p><a target="_blank" href="https://hexo.io/"><img src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&logo=hexo" title="博客框架为Hexo"></a>&nbsp;<a target="_blank" href="https://butterfly.js.org/"><img src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&logo=bitdefender" title="主题采用butterfly"></a>&nbsp;<a target="_blank" href="https://www.jsdelivr.com/"><img src="https://img.shields.io/badge/CDN-jsDelivr-orange?style=flat&logo=jsDelivr" title="本站使用JsDelivr为静态资源提供CDN加速"></a> &nbsp;<a target="_blank" href="https://vercel.com/ "><img src="https://img.shields.io/badge/Hosted-Vervel-brightgreen?style=flat&logo=Vercel" title="本站采用双线部署，默认线路托管于Vercel"></a>&nbsp;<a target="_blank" href="https://vercel.com/ "><img src="https://img.shields.io/badge/Hosted-Coding-0cedbe?style=flat&logo=Codio" title="本站采用双线部署，联通线路托管于Coding"></a>&nbsp;<a target="_blank" href="https://github.com/"><img src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&logo=GitHub" title="本站项目由Gtihub托管"></a>&nbsp;<a target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://img.shields.io/badge/Copyright-BY--NC--SA%204.0-d42328?style=flat&logo=Claris" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"></a></p></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><div class="aplayer no-destroy" data-id="12452413323" data-server="netease" data-type="playlist" data-fixed="true" data-autoplay="true"> </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"]):not([href="/no-pjax/"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener
+  btf.removeGlobalFnEvent('pjax')
+  btf.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
